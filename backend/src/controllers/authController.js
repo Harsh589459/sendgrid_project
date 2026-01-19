@@ -11,6 +11,7 @@ exports.googleLogin = async (req, res) => {
     })
 
     const payload = ticket.getPayload()
+    console.log("payload",payload)
     const email = payload.email
 
     if (!payload.email_verified) {
