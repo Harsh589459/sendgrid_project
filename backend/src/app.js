@@ -11,14 +11,35 @@ const globalSuppressionRoutes = require("./routes/globalSuppressionRoutes")
 const subscriptionGroupRoutes = require("./routes/subscriptionGroupRoutes")
 const groupUnsubscribers = require("./routes/groupUnsubscriptionRoutes")
 
-
-
-
-
-
 const app = express()
 
-app.use(cors())
+const allowedOrigins = [
+  "http://localhost:3000",
+  "http://localhost:5173",
+  "https://your-frontend.vercel.app"
+]
+
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      if (!origin) return callback(null, true)
+
+      if (allowedOrigins.includes(origin)) {
+        return callback(null, true)
+      }
+
+      return callback(new Error("Not allowed by CORS"))
+    },
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: [
+      "Content-Type",
+      "Authorization",
+      "on-behalf-of"
+    ]
+  })
+)
+
+app.options("*", cors())
 app.use(express.json())
 
 app.use("/auth", authRoutes)
@@ -29,13 +50,7 @@ app.use("/sendgrid", invalidEmailRoutes)
 app.use("/sendgrid", spamReportRoutes)
 app.use("/sendgrid", globalSuppressionRoutes)
 app.use("/sendgrid", subscriptionGroupRoutes)
-app.use("/sendgrid",groupUnsubscribers)
-
-
-
-
-
-
+app.use("/sendgrid", groupUnsubscribers)
 
 // Dummy API
 app.get("/api/data", (req, res) => {
