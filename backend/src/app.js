@@ -1,21 +1,13 @@
 const express = require("express")
 const cors = require("cors")
-
-const authRoutes = require("./routes/authRoutes")
-const sendgridRoutes = require("./routes/sendgridRoutes")
-const emailLogsRoutes = require("./routes/emailLogsRoutes")
-const blockRoutes = require("./routes/blockRoutes")
-const invalidEmailRoutes = require("./routes/invalidEmailRoutes")
-const spamReportRoutes = require("./routes/spamReportRoutes")
-const globalSuppressionRoutes = require("./routes/globalSuppressionRoutes")
-const subscriptionGroupRoutes = require("./routes/subscriptionGroupRoutes")
-const groupUnsubscribers = require("./routes/groupUnsubscriptionRoutes")
+const emailStatusRoutes = require("./routes/emailStatusRoutes")
 
 const app = express()
 
 const allowedOrigins = [
   "http://localhost:3000",
   "http://localhost:5173",
+    "http://localhost:5174",
   "https://your-frontend.vercel.app"
 ]
 
@@ -39,20 +31,12 @@ app.use(
   })
 )
 
-app.options("*", cors())
 app.use(express.json())
 
-app.use("/auth", authRoutes)
-app.use("/sendgrid", sendgridRoutes)
-app.use("/sendgrid", emailLogsRoutes)
-app.use("/sendgrid", blockRoutes)
-app.use("/sendgrid", invalidEmailRoutes)
-app.use("/sendgrid", spamReportRoutes)
-app.use("/sendgrid", globalSuppressionRoutes)
-app.use("/sendgrid", subscriptionGroupRoutes)
-app.use("/sendgrid", groupUnsubscribers)
 
-// Dummy API
+app.use("/sendgrid", emailStatusRoutes)
+
+// Health / test API
 app.get("/api/data", (req, res) => {
   res.json({
     message: "This data is coming from backend",

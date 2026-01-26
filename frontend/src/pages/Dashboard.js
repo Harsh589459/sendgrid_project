@@ -44,6 +44,9 @@ function Dashboard() {
         <div style={styles.card} onClick={() => navigate("/group-unsubscribe")}>
         Group Unsubscribe
         </div>
+         <div style={styles.card} onClick={() => navigate("/email-checkup")}>
+        Email Status
+        </div>
       </div>
     </div>
   )

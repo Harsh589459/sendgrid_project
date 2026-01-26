@@ -9,6 +9,7 @@ import GlobalSuppressions from "./pages/GlobalSuppressions"
 import SpamReports from "./pages/SpamReports"
 import UnsubscribeGroups from "./pages/UnsubscribeGroups"
 import GroupUnsubscribe from "./pages/GroupUnsubscribe"
+import EmailStatus from "./pages/EmailStatus"
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
       <Route path="/spam-reports" element={<SpamReports/>}/>
       <Route path="/unsubscribe-groups" element={<UnsubscribeGroups/>}/>
       <Route path="/group-unsubscribe" element={<GroupUnsubscribe/>}/>
+      <Route path="/email-checkup" element={<EmailStatus/>}/>
 
 
 
