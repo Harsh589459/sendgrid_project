@@ -8,7 +8,8 @@ const allowedOrigins = [
   "http://localhost:3000",
   "http://localhost:5173",
     "http://localhost:5174",
-  "https://your-frontend.vercel.app"
+  "https://your-frontend.vercel.app",
+  "https://www.globalsupportteam.com"
 ]
 
 app.use(
